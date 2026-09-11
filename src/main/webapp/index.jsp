@@ -1,39 +1,107 @@
-<section class="hero">
-    <div class="hero-copy">
-        <p class="eyebrow">Premium Car Marketplace</p>
-        <h2>Find the car<br>that <span>fits your drive.</span></h2>
-        <p class="hero-text">Hand-picked performance, luxury and everyday cars — all in one place. No noise, just the good stuff.</p>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarHub | Premium Cars</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+    <div class="brand">
+        <div class="logo">CH</div>
+        <div>
+            <h1>CarHub</h1>
+            <span>Drive what inspires you</span>
+        </div>
+    </div>
+    <div class="top-actions">
+        <button class="ghost" onclick="scrollToCars()">Explore Premium Cars</button>
+        <button class="cart" onclick="showCart()">Cart <span id="cartCount">0</span></button>
+    </div>
+</header>
 
-        <div class="hero-cta">
+<main>
+    <section class="hero">
+        <div class="hero-copy">
+            <p class="eyebrow">PREMIUM CAR MARKETPLACE</p>
+            <h2>Find the car that<br><span>fits your drive.</span></h2>
+            <p class="hero-text">Browse performance, luxury and everyday cars in one clean marketplace.</p>
             <button class="primary" onclick="scrollToCars()">Browse Inventory</button>
-
-            <div class="hero-trust">
-                <div class="hero-trust-avatars">
-                    <span>AK</span><span>RS</span><span>MP</span><span>+</span>
+        </div>
+        <div class="hero-car">
+            <div class="car-glow"></div>
+            <div class="car-silhouette">
+                <div class="hero-car-label">
+                    <div class="name">
+                        <small>Featured</small>
+                        <strong>Porsche 718 Cayman</strong>
+                    </div>
+                    <div class="price">₹98L</div>
                 </div>
-                <small><strong>4.9/5</strong> from 2,300+ buyers</small>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="hero-visual">
-        <div class="hero-car-card">
-            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&auto=format&fit=crop&q=80"
-                 alt="Porsche 718 Cayman"
-                 onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#171d27,#0d1117)'; this.parentNode.innerHTML='<div style=\'font-size:110px;font-weight:900;font-style:italic;color:#3c4653;display:grid;place-items:center;height:100%;\'>718</div>';">
+    <section class="stats">
+        <div><strong>24+</strong><span>Cars listed</span></div>
+        <div><strong>12</strong><span>Brands</span></div>
+        <div><strong>4.9/5</strong><span>Buyer rating</span></div>
+        <div><strong>24/7</strong><span>Online support</span></div>
+    </section>
 
-            <div class="hero-chip">
-                <span class="dot"></span>
-                <span>In Stock</span>
+    <section id="cars" class="catalog">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">INVENTORY</p>
+                <h3>Featured cars</h3>
             </div>
-
-            <div class="hero-car-label">
-                <div class="car-name">
-                    <small>Featured</small>
-                    <strong>Porsche 718 Cayman</strong>
-                </div>
-                <div class="car-price">₹98L</div>
-            </div>
+            <p id="resultCount" class="result-count"></p>
         </div>
+
+        <div class="filters">
+            <input id="search" type="search" placeholder="Search model or brand..." oninput="renderCars()">
+            <select id="brand" onchange="renderCars()">
+                <option value="all">All brands</option>
+                <option value="BMW">BMW</option>
+                <option value="Mercedes">Mercedes</option>
+                <option value="Audi">Audi</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Porsche">Porsche</option>
+                <option value="Ford">Ford</option>
+                <option value="Tata">Tata</option>
+                <option value="Kia">Kia</option>
+            </select>
+            <select id="price" onchange="renderCars()">
+                <option value="all">Any budget</option>
+                <option value="50">Under ₹50L</option>
+                <option value="80">Under ₹80L</option>
+                <option value="120">Under ₹1.2Cr</option>
+            </select>
+            <select id="sort" onchange="renderCars()">
+                <option value="featured">Featured</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+            </select>
+        </div>
+
+        <div id="carGrid" class="car-grid"></div>
+    </section>
+</main>
+
+<div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="modal-card">
+        <button class="close" onclick="closeModal()">×</button>
+        <div id="modalContent"></div>
     </div>
-</section>
+</div>
+
+<footer>
+    <strong>CarHub</strong>
+    <span>Demo project for Jenkins • Maven • Nexus • Tomcat</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
