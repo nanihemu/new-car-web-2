@@ -63,6 +63,7 @@
                 <option value="Porsche">Porsche</option>
                 <option value="Ford">Ford</option>
                 <option value="Tata">Tata</option>
+                <option value="Kia">Kia</option>
             </select>
             <select id="price" onchange="renderCars()">
                 <option value="all">Any budget</option>
