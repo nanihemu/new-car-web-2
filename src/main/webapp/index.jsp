@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="top-actions">
-        <button class="ghost" onclick="scrollToCars()">Explore Cars</button>
+        <button class="ghost" onclick="scrollToCars()">Explore Premium Cars</button>
         <button class="cart" onclick="showCart()">Cart <span id="cartCount">0</span></button>
     </div>
 </header>
