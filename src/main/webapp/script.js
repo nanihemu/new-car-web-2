@@ -85,10 +85,9 @@ function addToCart(id) {
 function showDetails(id) {
     const car = cars.find(c => c.id === id);
     document.getElementById("modalContent").innerHTML = `
-        <div style="border-radius:20px; overflow:hidden; margin-bottom:1rem; height:180px; background:#eef3f9;">
+        <div class="detail-visual">
             <img src="${car.image}" alt="${car.model}"
-                 style="width:100%; height:180px; object-fit:cover; display:block;"
-                 onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'font-size:3rem;font-weight:800;padding:2rem;text-align:center;\\'>${car.icon}</div>';">
+                 onerror="this.style.display='none'; this.parentNode.innerHTML='${car.icon}';">
         </div>
         <p class="eyebrow">${car.brand} • ${car.type}</p>
         <h2>${car.model}</h2>
