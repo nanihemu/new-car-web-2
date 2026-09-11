@@ -107,7 +107,7 @@
         </div>
         <div class="hero-car">
             <div class="car-glow"></div>
-            <div class="car-silhouette">SPORT</div>
+            <div class="car-silhouette"><span>SPORT</span></div>
         </div>
     </section>
 
