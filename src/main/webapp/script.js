@@ -1,13 +1,22 @@
 const cars = [
-    {id:1, brand:"BMW", model:"M4 Competition", type:"Performance", price:89, year:2025, fuel:"Petrol", power:"503 HP", tag:"HOT", icon:"M4"},
-    {id:2, brand:"Mercedes", model:"AMG C 43", type:"Performance", price:76, year:2025, fuel:"Petrol", power:"402 HP", tag:"NEW", icon:"C43"},
-    {id:3, brand:"Audi", model:"RS5 Sportback", type:"Luxury", price:82, year:2024, fuel:"Petrol", power:"444 HP", tag:"POPULAR", icon:"RS5"},
-    {id:4, brand:"Toyota", model:"Fortuner Legender", type:"SUV", price:48, year:2025, fuel:"Diesel", power:"201 HP", tag:"VALUE", icon:"F"},
-    {id:5, brand:"Porsche", model:"718 Cayman", type:"Sports", price:98, year:2024, fuel:"Petrol", power:"300 HP", tag:"SPORT", icon:"718"},
-    {id:6, brand:"Ford", model:"Mustang GT", type:"Muscle", price:74, year:2025, fuel:"Petrol", power:"480 HP", tag:"ICONIC", icon:"GT"},
-    {id:7, brand:"BMW", model:"X5 xDrive40i", type:"SUV", price:97, year:2025, fuel:"Petrol", power:"335 HP", tag:"PREMIUM", icon:"X5"},
-    {id:8, brand:"Mercedes", model:"GLC 300", type:"SUV", price:71, year:2025, fuel:"Petrol", power:"255 HP", tag:"FAMILY", icon:"GLC"},
-    {id:9, brand:"Audi", model:"Q7 Premium Plus", type:"SUV", price:96, year:2024, fuel:"Petrol", power:"335 HP", tag:"LUXURY", icon:"Q7"}
+    {id:1, brand:"BMW", model:"M4 Competition", type:"Performance", price:89, year:2025, fuel:"Petrol", power:"503 HP", tag:"HOT", icon:"M4",
+     image:"https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&auto=format&fit=crop&q=80"},
+    {id:2, brand:"Mercedes", model:"AMG C 43", type:"Performance", price:76, year:2025, fuel:"Petrol", power:"402 HP", tag:"NEW", icon:"C43",
+     image:"https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&auto=format&fit=crop&q=80"},
+    {id:3, brand:"Audi", model:"RS5 Sportback", type:"Luxury", price:82, year:2024, fuel:"Petrol", power:"444 HP", tag:"POPULAR", icon:"RS5",
+     image:"https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=600&auto=format&fit=crop&q=80"},
+    {id:4, brand:"Toyota", model:"Fortuner Legender", type:"SUV", price:48, year:2025, fuel:"Diesel", power:"201 HP", tag:"VALUE", icon:"F",
+     image:"https://images.unsplash.com/photo-1594502184342-2e12f4b6c1b5?w=600&auto=format&fit=crop&q=80"},
+    {id:5, brand:"Porsche", model:"718 Cayman", type:"Sports", price:98, year:2024, fuel:"Petrol", power:"300 HP", tag:"SPORT", icon:"718",
+     image:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&auto=format&fit=crop&q=80"},
+    {id:6, brand:"Ford", model:"Mustang GT", type:"Muscle", price:74, year:2025, fuel:"Petrol", power:"480 HP", tag:"ICONIC", icon:"GT",
+     image:"https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&auto=format&fit=crop&q=80"},
+    {id:7, brand:"BMW", model:"X5 xDrive40i", type:"SUV", price:97, year:2025, fuel:"Petrol", power:"335 HP", tag:"PREMIUM", icon:"X5",
+     image:"https://images.unsplash.com/photo-1556189250-72ba954cfc2b?w=600&auto=format&fit=crop&q=80"},
+    {id:8, brand:"Mercedes", model:"GLC 300", type:"SUV", price:71, year:2025, fuel:"Petrol", power:"255 HP", tag:"FAMILY", icon:"GLC",
+     image:"https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=600&auto=format&fit=crop&q=80"},
+    {id:9, brand:"Audi", model:"Q7 Premium Plus", type:"SUV", price:96, year:2024, fuel:"Petrol", power:"335 HP", tag:"LUXURY", icon:"Q7",
+     image:"https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=600&auto=format&fit=crop&q=80"}
 ];
 
 let cart = [];
@@ -35,10 +44,17 @@ function renderCars() {
     document.getElementById("resultCount").textContent = result.length + " cars available";
 
     const grid = document.getElementById("carGrid");
+    if (!result.length) {
+        grid.innerHTML = '<div class="empty">No cars match your filters.</div>';
+        return;
+    }
+
     grid.innerHTML = result.map(car => `
         <article class="car-card">
             <div class="car-visual">
                 <span class="tag">${car.tag}</span>
+                <img src="${car.image}" alt="${car.brand} ${car.model}"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="vehicle-art">${car.icon}</div>
             </div>
             <div class="car-body">
@@ -58,10 +74,6 @@ function renderCars() {
             </div>
         </article>
     `).join("");
-
-    if (!result.length) {
-        grid.innerHTML = '<div class="empty">No cars match your filters.</div>';
-    }
 }
 
 function addToCart(id) {
@@ -73,7 +85,11 @@ function addToCart(id) {
 function showDetails(id) {
     const car = cars.find(c => c.id === id);
     document.getElementById("modalContent").innerHTML = `
-        <div class="detail-visual">${car.icon}</div>
+        <div style="border-radius:20px; overflow:hidden; margin-bottom:1rem; height:180px; background:#eef3f9;">
+            <img src="${car.image}" alt="${car.model}"
+                 style="width:100%; height:180px; object-fit:cover; display:block;"
+                 onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'font-size:3rem;font-weight:800;padding:2rem;text-align:center;\\'>${car.icon}</div>';">
+        </div>
         <p class="eyebrow">${car.brand} • ${car.type}</p>
         <h2>${car.model}</h2>
         <div class="detail-price">${money(car.price)}</div>
@@ -108,4 +124,3 @@ function scrollToCars() {
 }
 
 document.addEventListener("DOMContentLoaded", renderCars);
-
